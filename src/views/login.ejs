@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="img/fav.png">
+		<title><%= title%></title>
+		
+		<!-- Error CSS -->
+		<link href="css/login.css" rel="stylesheet" media="screen">
+
+		<!-- Animate CSS -->
+		<link href="css/animate.css" rel="stylesheet" media="screen">
+
+		<!-- Ion Icons -->
+    <link href="fonts/icomoon/icomoon.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js"></script>
+    <script src="js/my-ajax.js"></script>
+    <script src="js/layer/layer.js"></script>
+	</head>
+	<body>
+		<form id="wrapper">
+			<div id="box" class="animated bounceIn">
+				<div id="top_header">
+					<img src="img/logo.png" alt="Arise Admin Dashboard Logo" />
+					<h5>
+					输入账号密码<br />
+						访问管理系统
+					</h5>
+				</div>
+				<div id="inputs">
+					<div class="form-block">
+						<input type="text" placeholder="请输入账号" value="<%=username%>" id="input-username">
+						<i class="icon-user-check"></i>
+					</div>
+					<div class="form-block">
+						<input type="password" placeholder="请输入密码" id="input-password">
+						<i class="icon-spell-check"></i>
+					</div>
+					<input type="submit" value="登录" id="btn-submit">
+				</div>
+				<div id="bottom" class="clearfix">
+					<div class="pull-right">
+						<label class="switch pull-right">
+							<input type="checkbox" class="switch-input" checked>
+							<span class="switch-label" data-on="Yes" data-off="No"></span>
+							<span class="switch-handle"></span>
+						</label>
+					</div>
+					<div class="pull-right">
+						<span class="cb-label">记住账号</span>
+					</div>
+				</div>
+			</div>
+		</form>
+  </body>
+  <script>
+    $(function () {
+      var $inputUserName = $('#input-username')
+      var $inputPassword = $('#input-password')
+      $('#btn-submit').click(function(e) {
+        e.preventDefault()
+        const username = $inputUserName.val().trim()
+        const password = $inputPassword.val().trim()
+        const switchHandleLeft = $('.switch-handle').position().left
+        const remember = switchHandleLeft === 39 ? 1 : 0
+        if (username === '') {
+          $inputUserName.attr('placeholder', '必须输入账号').addClass('error')
+          return
+        } else {
+          $inputUserName.attr('placeholder', '请输入账号').removeClass('error')
+        }
+        if (password === '') {
+          $inputPassword.attr('placeholder', '必须输入密码').addClass('error')
+          return
+        } else {
+          $inputPassword.attr('placeholder', '请输入密码').removeClass('error')
+        }
+
+        ajax.post('/api/admin/login', {
+          username,
+          password,
+          remember
+        }, function(err, data) {
+            if (err) {
+              if (Array.isArray(err)) {
+                err = err.join('<br />')
+              }
+              layer.msg(err)
+              return
+            }
+            // 跳转到指定 url 或首页
+            const redirectUrl = new URLSearchParams(location.search).get('url') || '/'
+            location.href = redirectUrl
+        })
+                
+      })
+
+      $('#input-username, #input-password').keyup(function () {
+        const value = $(this).val().trim()
+        if (value !== '') {
+          $(this).removeClass('error')
+        } else {
+          $(this).addClass('error')
+        }
+      })
+    })
+  </script>
+</html>
