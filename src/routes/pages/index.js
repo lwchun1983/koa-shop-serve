@@ -1,10 +1,11 @@
 const Router = require('koa-router')
 const {PageAuth} = require('../../middlewares/pageAuth')
+const {navigate} = require('../../middlewares/navigate')
 const Home = require('../../controller/home')
 const {dateFormat} = require('../../core/util')
 const router = new Router()
 
-router.get('/', new PageAuth().verify, async (ctx, next) => {
+router.get('/', new PageAuth().verify, navigate(), async (ctx, next) => {
   const {id} = ctx.session.admin
   let {
     admin, 
@@ -19,6 +20,7 @@ router.get('/', new PageAuth().verify, async (ctx, next) => {
   })
   await ctx.render('index', {
     title: '商城后台',
+    navigate: ctx.navigate,
     admin,
     goodsTotal,
     goodsList,

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="img/fav.png">
+		<title><%=title%></title>
+		
+		<!-- Bootstrap CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+
+		<!-- Main CSS -->
+		<link href="css/main.css" rel="stylesheet" media="screen" />
+
+		<!-- Ion Icons -->
+		<link href="fonts/icomoon/icomoon.css" rel="stylesheet" />
+
+		<!-- Data Tables -->
+		<link rel="stylesheet" href="css/datatables/dataTables.bs.min.css">
+		<link rel="stylesheet" href="css/datatables//autoFill.bs.min.css">
+		<link rel="stylesheet" href="css/datatables/fixedHeader.bs.css">
+
+		<!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="js/html5shiv.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<!-- Header starts -->
+		<header>
+
+			<!-- Logo starts -->
+			<a href="/" class="logo">
+				<img src="img/logo.png" alt="Arise Admin Dashboard Logo" />
+			</a>
+			<!-- Logo ends -->
+
+			<!-- Header actions starts -->
+			<ul id="header-actions" class="clearfix">
+				<li class="list-box user-admin hidden-xs dropdown">
+					<div class="admin-details">
+						<div class="name"><%= admin.username%></div>
+						<div class="designation"><%= admin.nickname%></div>
+					</div>
+					<a id="drop4" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-user"></i>
+					</a>
+					<ul class="dropdown-menu sm">
+						<li class="dropdown-content">
+							<a href="profile.html">修改信息</a>
+							<a href="forgot-pwd.html">修改密码</a>
+							<a href="/logout">退出系统</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<button type="button" id="toggleMenu" class="toggle-menu">
+						<i class="collapse-menu-icon"></i>
+					</button>
+				</li>
+			</ul>
+			<!-- Header actions ends -->
+			<!-- <div class="custom-search hidden-sm hidden-xs">
+				<input type="text" class="search-query" placeholder="Search here ...">
+				<i class="icon-search3"></i>
+			</div> -->
+		</header>
+		<!-- Header ends -->
+
+		<!-- Left sidebar start -->
+		<%- include('navigate') %> 
+		<!-- Left sidebar end -->
