@@ -1,0 +1,173 @@
+
+<%- include('widgets/header') %> 
+
+<!-- Dashboard Wrapper Start -->
+<div class="dashboard-wrapper">
+
+  <!-- Container fluid Starts -->
+  <div class="container-fluid">
+
+    <!-- Top Bar Starts -->
+    <div class="top-bar clearfix">
+      <div class="row gutter">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <div class="page-title">
+            <h3>后台首页</h3>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <ul class="right-stats" id="mini-nav-right">
+            <li>
+              <a href="javascript:void(0)" class="btn btn-danger"><span>76</span>订单数</a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="btn btn-success">
+                <span><%=goodsTotal%></span>商品数</a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="btn btn-info"><span><%= userTotal%></span>会员数</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Top Bar Ends -->
+
+    <!-- Row Starts -->
+    <div class="row gutter">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-blue">
+          <div class="panel-heading">
+            <h4>商品数据</h4>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <div class="col-sm-12">
+                <a href="" class="pull-right">查看更多<span class="icon-chevron-right"></span></a>
+              </div>
+              <table class="table table-striped table-condensed table-bordered no-margin">
+                <thead>
+                  <tr>
+                    <th>商品名称</th>
+                    <th>分类</th>
+                    <th>图片</th>
+                    <th>本店价格</th>
+                    <th>市场价格</th>
+                    <th>库存</th>
+                    <th>销量</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let item of goodsList){ %>
+                  <tr>
+                    <td><%= item.goodsName%></td>
+                    <td><%= item.cname%></td>
+                    <td><img src="<%= item.goodsImg%>" height="80"/></td>
+                    <td>$<%= item.goodsPrice%></td>
+                    <td>$<%= item.marketPrice%></td>
+                    <td><%= item.stock%></td>
+                    <td><%= item.saleNum%></td>
+                    <td></td>
+                  </tr>
+                  <% }%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Row Ends -->
+
+    <!-- Row Starts -->
+    <div class="row gutter">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-blue">
+          <div class="panel-heading">
+            <h4>会员数据</h4>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered no-margin" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>账号</th>
+                    <th>昵称</th>
+                    <th>头像</th>
+                    <th>注册时间</th>
+                    <th>最近登录</th>
+                    <th>来源</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let item of userlist){ %>
+                  <tr>
+                    <td><%= item.username || item.openid%></td>
+                    <td><%= item.nickname%></td>
+                    <td>
+                      <% if(item.avatar){ %> 
+                        <img src="item.avatar" height="80"/>
+                      <% } %> 
+                    </td>
+                    <td><%= item.regTime %> </td>
+                    <td><%= item.lastLoginTime %> </td>
+                    <td><%= item.openid !== '' ? '微信' : '网页'%></td>
+                  </tr>
+                  <% }%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Row Ends -->
+
+    <!-- Row Starts -->
+    <div class="row gutter">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-blue">
+          <div class="panel-heading">
+            <h4>订单数据</h4>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table id="fixedHeader" class="table table-striped table-bordered no-margin" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tiger Nvimn</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>61</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Row Ends -->
+
+  </div>
+  <!-- Container fluid ends -->
+  
+</div>
+<!-- Dashboard Wrapper End -->
+
+<%- include('widgets/footer') %>
+</body>
+</html>

@@ -10,11 +10,7 @@ const router = new Router({
 router.post('/login', async (ctx, next) => {
   const v = await new LoginValidator().validate(ctx)
   const admin = await Admin.login(v.get('body.username'), v.get('body.password'))
-  if (v.get('body.remember') == 1) {
-    ctx.session.username = v.get('body.username')
-  } else {
-    ctx.session.username = null
-  }
+
   ctx.session.admin = {
     id: admin.id,
     username: admin.username,

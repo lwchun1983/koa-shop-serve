@@ -6,13 +6,13 @@ const navigate = [
   {
     name: '主页面',
     path: '/',
-    iconClass: 'icon-air-play',
+    iconClass: 'fa fa-th-large',
     children: []
   },
   {
     name: '商品管理',
     path: '/goods',
-    iconClass: 'icon-gift2',
+    iconClass: 'fa fa-table',
     children: [
       {
         name: '商品分类',
@@ -27,7 +27,7 @@ const navigate = [
   {
     name: '会员管理',
     path: '/user',
-    iconClass: 'icon-man-woman',
+    iconClass: 'fa fa-user',
     children: [
       {
         name: '会员列表',
@@ -42,7 +42,7 @@ const navigate = [
   {
     name: '订单管理',
     path: '/order',
-    iconClass: 'icon-abacus',
+    iconClass: 'fa fa-bar-chart-o',
     children: [
       {
         name: '订单列表',
@@ -53,7 +53,7 @@ const navigate = [
   {
     name: '网站设置',
     path: '/settings',
-    iconClass: 'icon-settings',
+    iconClass: 'fa fa-cutlery',
     children: [
       {
         name: '网站配置',

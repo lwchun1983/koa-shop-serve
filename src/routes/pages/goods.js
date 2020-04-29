@@ -9,17 +9,14 @@ const router = new Router({
 
 router.get('/', new PageAuth().verify, navigate(), async(ctx) => {
   const {id} = ctx.session.admin
-  let {
-    admin, 
-    goods: {count: goodsTotal, rows: goodsList}
-  } = await new Goods(id).list()
+  let {admin} = await new Goods(id).list()
 
   await ctx.render('goods', {
     title: '商品列表',
     navigate: ctx.navigate,
-    admin,
-    goodsTotal,
-    goodsList
+    admin
   })
 })
+
+router
 module.exports = router

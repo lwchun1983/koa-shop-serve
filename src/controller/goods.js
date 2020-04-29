@@ -3,7 +3,7 @@
  * @author LeviLee
  */
 const {Admin} = require('../lib/model/admin')
-const {Goods:GoodsModel} = require('../lib/model/goods')
+// const {Goods:GoodsModel} = require('../lib/model/goods')
 // const {Category} = require('../lib/model/category')
 
 class Goods {
@@ -12,8 +12,7 @@ class Goods {
   }
   async list () {
     const admin = await Admin.getInfo(this.adminId)
-    const goods = await GoodsModel.getAll({count: 10})
-    return {admin, goods}
+    return {admin}
   }
 }
 

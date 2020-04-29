@@ -1,59 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="shortcut icon" href="img/fav.png">
-		<title><%= title%></title>
-		
-		<!-- Error CSS -->
-		<link href="css/login.css" rel="stylesheet" media="screen">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+  <title><%= title%></title>
+  <link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+  <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+  <link href="css/animate.css" rel="stylesheet">
+  <link href="css/style.css?v=2.2.0" rel="stylesheet">
+</head>
 
-		<!-- Animate CSS -->
-		<link href="css/animate.css" rel="stylesheet" media="screen">
-
-		<!-- Ion Icons -->
-    <link href="fonts/icomoon/icomoon.css" rel="stylesheet" />
-    <script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js"></script>
-    <script src="js/my-ajax.js"></script>
-    <script src="js/layer/layer.js"></script>
-	</head>
-	<body>
-		<form id="wrapper">
-			<div id="box" class="animated bounceIn">
-				<div id="top_header">
-					<img src="img/logo.png" alt="Arise Admin Dashboard Logo" />
-					<h5>
-					输入账号密码<br />
-						访问管理系统
-					</h5>
-				</div>
-				<div id="inputs">
-					<div class="form-block">
-						<input type="text" placeholder="请输入账号" value="<%=username%>" id="input-username">
-						<i class="icon-user-check"></i>
-					</div>
-					<div class="form-block">
-						<input type="password" placeholder="请输入密码" id="input-password">
-						<i class="icon-spell-check"></i>
-					</div>
-					<input type="submit" value="登录" id="btn-submit">
-				</div>
-				<div id="bottom" class="clearfix">
-					<div class="pull-right">
-						<label class="switch pull-right">
-							<input type="checkbox" class="switch-input" checked>
-							<span class="switch-label" data-on="Yes" data-off="No"></span>
-							<span class="switch-handle"></span>
-						</label>
-					</div>
-					<div class="pull-right">
-						<span class="cb-label">记住账号</span>
-					</div>
-				</div>
-			</div>
-		</form>
-  </body>
+<body class="gray-bg">
+  <div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+      <div>
+          <h1 class="logo-name">Ling</h1>
+      </div>
+      <h3>欢迎使用 Ling Mall</h3>
+      <form class="m-t" id="loginForm">
+        <div class="form-group">
+            <input type="text" class="form-control" id="input-username" placeholder="请输入账号" >
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="input-password" placeholder="请输入密码">
+        </div>
+        <button type="submit" id="btn-submit" class="btn btn-primary block full-width m-b">登 录</button>
+        </p>
+      </form>
+    </div>
+  </div>
+  <!-- Mainly scripts -->
+  <script src="js/jquery-2.1.1.min.js"></script>
+  <script src="js/my-ajax.js"></script>
+  <script src="js/bootstrap.min.js?v=3.4.0"></script>
+  <script src="js/plugins/layer/layer.min.js"></script>
   <script>
     $(function () {
       var $inputUserName = $('#input-username')
@@ -62,14 +42,13 @@
         e.preventDefault()
         const username = $inputUserName.val().trim()
         const password = $inputPassword.val().trim()
-        const switchHandleLeft = $('.switch-handle').position().left
-        const remember = switchHandleLeft === 39 ? 1 : 0
         if (username === '') {
           $inputUserName.attr('placeholder', '必须输入账号').addClass('error')
           return
         } else {
           $inputUserName.attr('placeholder', '请输入账号').removeClass('error')
         }
+
         if (password === '') {
           $inputPassword.attr('placeholder', '必须输入密码').addClass('error')
           return
@@ -79,8 +58,7 @@
 
         ajax.post('/api/admin/login', {
           username,
-          password,
-          remember
+          password
         }, function(err, data) {
             if (err) {
               if (Array.isArray(err)) {
@@ -106,4 +84,6 @@
       })
     })
   </script>
+</body>
+
 </html>

@@ -1,41 +1,49 @@
-<div class="vertical-nav vertical-nav-sm">
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+      <ul class="nav" id="side-menu">
+          <li class="nav-header">
 
-  <!-- Collapse menu starts -->
-  <button class="collapse-menu">
-    <i class="icon-menu2"></i>
-  </button>
-  <!-- Collapse menu ends -->
-
-  <!-- Current user starts -->
-  <div class="user-details clearfix">
-    <a href="/admin-profile" class="user-img">
-      <img src="img/thumbs/admin1.png" alt="User Info">
-    </a>
-    <h5 class="user-name"><%=  admin.nickname %> </h5>
-  </div>
-  <!-- Current user ends -->
-
-  <!-- Sidebar menu starts -->
-  <ul class="menu clearfix">
-    <% navigate.forEach(item => { %>
-      <li <% if (item.active) { %>class="active selected"<% } %>>
-        <a href="<%= item.children.length > 0 ? '###' : item.path %>">
-          <% if (item.iconClass !== '') { %>
-            <i class="<%= item.iconClass %> "></i>
-          <% } %>
-          <span class="menu-item"><%= item.name %> </span>
-        </a>
-        <% if (item.children.length > 0) { %>
-        <ul>
-          <% item.children.forEach(val => { %>
-            <li>
-              <a href='<%= val.path %>' <% if (val.active) { %>class="current"<% } %>><%= val.name %></a>
+              <div class="dropdown profile-element"> <span>
+                  <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                   </span>
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="/">
+                      <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><%= admin.username %> </strong>
+                   </span>  <span class="text-muted text-xs block"><%= admin.nickname %>  <b class="caret"></b></span> </span>
+                  </a>
+                  <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                      <li><a href="profile.html">个人资料</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li><a href="/logout">安全退出</a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="logo-element">
+                  Ling
+              </div>
+          </li>
+          <% navigate.forEach(item => { %>
+            <li <% if (item.active) { %>class="active"<% } %>>
+              <a href="<%= item.children.length > 0 ? '###' : item.path %>">
+                <% if (item.iconClass !== '') { %>
+                  <i class="<%= item.iconClass %> "></i>
+                <% } %>
+                <span class="nav-label"><%= item.name %> </span>
+                <% if (item.children.length > 0) { %>
+                  <span class="fa arrow"></span>
+                <% } %>
+              </a>
+              <% if (item.children.length > 0) { %>
+              <ul class="nav nav-second-level">
+                <% item.children.forEach(val => { %>
+                  <li <% if (val.active) { %>class="active"<% } %>>
+                    <a href='<%= val.path %>'><%= val.name %></a>
+                  </li>
+                <% }) %>
+              </ul>
+              <% } %>
             </li>
           <% }) %>
-        </ul>
-        <% } %>
-      </li>
-    <% }) %>
-  </ul>
-  <!-- Sidebar menu ends -->
-</div>
+      </ul>
+  </div>
+</nav>
