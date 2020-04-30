@@ -4,7 +4,7 @@
  */
 const {Admin} = require('../lib/model/admin')
 // const {Goods:GoodsModel} = require('../lib/model/goods')
-// const {Category} = require('../lib/model/category')
+const {Category} = require('../lib/model/category')
 
 class Goods {
   constructor (adminId) {
@@ -12,7 +12,8 @@ class Goods {
   }
   async list () {
     const admin = await Admin.getInfo(this.adminId)
-    return {admin}
+    const category = await Category.getCategoryTree(1)
+    return {admin, category}
   }
 }
 

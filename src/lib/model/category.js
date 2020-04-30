@@ -1,5 +1,6 @@
 const {Sequelize, Model} = require('sequelize')
 const {sequelize} = require('../../core/db')
+const {categoryTree} = require('../../utils/function')
 const {prefix} = require('../../config/config').database
 const ATTRIBUTES = ['id', 'parent_id', 'name', 'img']
 class Category extends Model {
@@ -22,6 +23,14 @@ class Category extends Model {
       attributes: ATTRIBUTES, 
     })
     return list
+  }
+
+  static async getCategoryTree (type = 0) {
+    const list = await Category.findAll({
+      where: {type},
+      attributes: ATTRIBUTES
+    }).then(res => res.map(item => item.dataValues))
+    return categoryTree(list)
   }
 }
 

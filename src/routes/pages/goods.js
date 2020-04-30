@@ -9,12 +9,13 @@ const router = new Router({
 
 router.get('/', new PageAuth().verify, navigate(), async(ctx) => {
   const {id} = ctx.session.admin
-  let {admin} = await new Goods(id).list()
+  let {admin, category} = await new Goods(id).list()
 
   await ctx.render('goods', {
     title: '商品列表',
     navigate: ctx.navigate,
-    admin
+    admin,
+    category
   })
 })
 
