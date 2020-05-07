@@ -1,5 +1,7 @@
 const Router = require('koa-router')
 const {Goods} = require('../../lib/model/goods')
+const {PositiveIntegerValidator} = require('../../lib/validate/validator')
+const {Success} = require('../../core/http-exception')
 
 const router = new Router({
   prefix: '/api/goods'
@@ -35,5 +37,14 @@ router.get('/', async (ctx, next) => {
   }
 })
 
+router.delete('/delete/:id', async(ctx) => {
+  const v = await new PositiveIntegerValidator().validate(ctx)
+  await Goods.destroy({
+    where: {
+      goodsId: v.get('path.id')
+    }
+  })
+  throw new Success()
+})
 
 module.exports = router

@@ -1,21 +1,60 @@
-<!-- Footer Start -->
-<footer>
-  Copyright <a href="http://www.###.com/">Arise</a> Admin <span>2020</span>
-</footer>
-<!-- Footer end -->
+<div class="footer">
+  <div class="pull-right">
+      By：<a href="###" target="_blank">Ling Mall</a>
+  </div>
+  <div>
+      <strong>Copyright</strong> Ling Mall &copy; 2020
+  </div>
+</div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js"></script>
+<!-- Mainly scripts -->
+<script src="js/jquery-2.1.1.min.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js?v=3.4.0"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-<!-- jquery ScrollUp JS -->
-<script src="js/scrollup/jquery.scrollUp.js"></script>
+<script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="js/plugins/layer/2.4/layer.js"></script>
+<!-- Data Tables -->
+<script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
-<!-- Sparkline Graphs -->
-<script src="js/sparkline/sparkline.js"></script>
-<script src="js/sparkline/custom-sparkline.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="js/hplus.js?v=2.2.0"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<script src="js/plugins/nestable/jquery.nestable.js"></script>
+<script>
+  function layer_window (title, url, w, h) {
+    if (title == null || title == '') {
+      title = false;
+    }
+    if (url == null || url == '') {
+      url = "/404";
+    }
+    if (w == null || w == '') {
+      w = 1200;
+    }
+    if (h == null || h == '') {
+      h=($(window).height() - 50);
+    }
+    layer.open({
+      type: 2,
+      area: [w+'px', h +'px'],
+      fix: false,
+      maxmin: true,
+      shade:0.4,
+      title: title,
+      content: url
+    })
+  }
 
-<!-- Custom JS -->
-<script src="js/custom.js"></script>
+  function layer_full_window (title = '', url = '/404') {
+    var index = layer.open({
+      type: 2,
+      title: title,
+      content: url
+    });
+	  layer.full(index);
+  }
+</script>

@@ -100,46 +100,24 @@
                 </div>
 
             </div>
-            <div class="footer">
-                <div class="pull-right">
-                    By：<a href="###" target="_blank">Ling Mall</a>
-                </div>
-                <div>
-                    <strong>Copyright</strong> Ling Mall &copy; 2020
-                </div>
-            </div>
+            <%- include('widgets/footer.ejs')%> 
 
         </div>
     </div>
 
 
     </div>
-
-    <!-- Mainly scripts -->
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js?v=3.4.0"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-    <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
-
-    <!-- Data Tables -->
-    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
-
-    <!-- Custom and plugin javascript -->
-    <script src="js/hplus.js?v=2.2.0"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
-    <script src="js/plugins/nestable/jquery.nestable.js"></script>
     
     <!-- Page-Level Scripts -->
     <script>
+        var tables
         const dataTablesSettings = {
+                processing: true,
                 ordering: false,
                 searching: false,
                 lengthChange: false,
                 serverSide: true,
-                pageLength: 10,
+                pageLength: 10, // 每页显示数量
                 ajax: {
                     url: '/api/goods',
                     data: res => {
@@ -172,7 +150,7 @@
                         targets: [7],
                         data: "goodsId",
                         render: function(data, type, full) {
-                            return `<a href="/api/goods/update/${data}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 编辑</a> <a href="/api/goods/delete/${data}" class="btn btn-white btn-sm"><i class="fa fa-trash-o"></i> 删除</a>`
+                            return `<a href="javascript:" onclick="layer_window('编辑商品', '/api/goods/update/${data}')" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 编辑</a> <a href="javascript:" onclick="goods_del('/api/goods/delete/${data}')" class="btn btn-white btn-sm"><i class="fa fa-trash-o"></i> 删除</a>`
                         }
                     }
                 ]
@@ -181,14 +159,36 @@
             $("#category-name").text(cname).attr('data-cat-id', catId).attr('data-cat-type', type)
         }
         $(document).ready(function () {
-            
-            $('.dataTables-example').dataTable(dataTablesSettings)
+            tables = $('.dataTables-example').dataTable(dataTablesSettings)
         });
 				
-				
+		function goods_del (url) {
+            // const selfElement = window.event.target
+            layer.confirm('确定要删除吗？', function () {
+                let loadIndex
+                $.ajax({
+                    url,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    beforeSend: function () {
+                        loadIndex = layer.load()
+                    },
+                    success: function (data) {
+                        if (data.errorCode === 0) {
+                            layer.msg('删除成功', {icon: 1})
+                            tables.fnDestroy()
+                            tables.dataTable(dataTablesSettings)
+                        } else {
+                            layer.msg('删除失败', {icon: 2})
+                        }
+                    },
+                    complete: function () {
+                        layer.close(loadIndex)
+                    }
+                })
+            })
+        }		
     </script>
-
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script><!--统计代码，可删除-->
 
 </body>
 
